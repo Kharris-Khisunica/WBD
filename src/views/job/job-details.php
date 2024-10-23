@@ -1,59 +1,56 @@
 <?php
+$job = $data['job'];
+$applicants = $data['applicants'];
 
-use app\core\Application;
-
-// Ensure session is started
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-// If using an MVC framework, make sure paths are correct
-include_once Application::$BASE_DIR . '/src/views/component/navbar.php';
-
-// Sample data or fetch it from a database
-$jobTitle = $data['profile'];
-$jobLocation = "Bandung, Jawa Barat";
-$companyName = "Google, Inc";
-$jobTypes = ["hybrid", "part-time"];
-$jobDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit...";
-
+$id = $job['lowongan_id'];
+$job_nama = $job['posisi'];
+$company_nama = $job['nama'];
+$lokasi = $job['lokasi'];
+$job_type = $job['jenis_pekerjaan'];
+$location_type = $job['jenis_lokasi'];
+$description = $job['deskripsi'];
+$pp_path = '/public/asset/default-job.png';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/path/to/styles.css">
-    <title>Job Listing</title>
-</head>
-<body>
-    <!-- Header included from navbar.php -->
-    <main class="main-content">
-        <div class="job-card">
-            <h1 class="job-title"><?php echo $jobTitle; ?></h1>
-            <p class="job-location"><?php echo $jobLocation; ?></p>
-            <!-- Job Type Badges -->
-            <div class="job-types">
-                <?php foreach ($jobTypes as $type): ?>
-                    <span><?php echo $type; ?></span>
-                <?php endforeach; ?>
-            </div>
-            <hr>
-            <!-- Company and Edit Button -->
-            <div class="company-section">
-                <div class="company-info">
-                    <div class="company-logo"></div>
-                    <span><?php echo $companyName; ?></span>
+<section>
+    <div class="job-details-wrapper">
+        <div class="job-details-card">
+            <div class="job-details-container">
+                <div class="header-details">
+                    <div class="company-profile">
+                        <div class="logo-container-pic">
+                            <img src="/public/asset/default-job.png" alt="logo" class="logo-img">
+                        </div>
+                        <h5><?= $company_nama ?></h5>
+                    </div>
+                    <button class="green-btn">Edit Listing</button>
                 </div>
-                <button class="edit-button">Edit Listing</button>
+                <h2><?= $job_nama ?></h2>
+                <h5 class="text-muted"><?= $lokasi ?></h5>
+                <div class="chip-container">
+                    <img src="/public/asset/briefcase.png" alt="briefcase" class="briefcase">
+                    <p class="chip bg-green-400"><?= $location_type ?></p>
+                    <p class="chip bg-orange-300"><?= $job_type ?></p>
+                </div>
             </div>
-            <!-- Job Description -->
-            <section class="job-description">
-                <h2>About</h2>
-                <p><?php echo $jobDescription; ?></p>
-            </section>
+            <div class="navigation-tabs">
+                <button class="tab-link navigation-btn" data-tab="jobDescription" id="defaultOpen">Description</button>
+                <button class="tab-link navigation-btn" data-tab="applicants">Applicants</button>
+            </div>
         </div>
-    </main>
-    <script defer src="/public/js/navbar.js"></script>
-</body>
-</html>
+        <div class="job-content-card">
+            <div id="jobDescription" class="tab-content active-tab">
+                <p><?= $description ?></p>
+            </div>
+            <div id="applicants" class="tab-content">
+                <div class="applicant-card">
+                    <div class="pagination-cards">
+                        <?php
+                        require_once __DIR__ . "/../component/applicant-cards.php";
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script defer src="/public/js/job-detail.js"></script>

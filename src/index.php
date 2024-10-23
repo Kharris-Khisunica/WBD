@@ -20,8 +20,6 @@ $config = [
     'port' => $_ENV['POSTGRES_PORT'],
 ];
 
-echo 'POSTGRES_USER: ' . $_ENV['POSTGRES_USER'] . PHP_EOL;
-echo 'POSTGRES_DB: ' . $_ENV['POSTGRES_DB'] . PHP_EOL;
 
 $app = new Application(dirname(__DIR__), $config);
 $routes = require __DIR__ . '/routes.php';

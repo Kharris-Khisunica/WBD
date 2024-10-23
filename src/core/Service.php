@@ -14,6 +14,7 @@ class Service
                 $errors[$field] = ucfirst(strtolower($field)) . " can not be empty!";
             }   
         }
+        return $errors;
     }
 
     protected function validation($errors)

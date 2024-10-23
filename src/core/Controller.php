@@ -16,12 +16,14 @@ class Controller
     }
     public function renderMainContent(string $content, $data){
         ob_start();
+        extract($data);
         include_once _VIEW_PATH .  "/$this->view" . "/$content.php";
         return ob_get_clean();
     }
 
     public function renderComponent($component,$data){
         ob_start();
+        extract($data);
         include_once _COMPONENT_PATH . "/$component.php";
         return ob_get_clean();
     }
@@ -29,7 +31,7 @@ class Controller
     public function renderPage($content,$data){
         $mainContent = $this->renderMainContent($content,$data);
         ob_start();
-
+        extract($data);
         include_once _LAYOUT_PATH;
         $layout = ob_get_clean();
         $layout = str_replace('{{page}}', $this->view, $layout);

@@ -5,7 +5,7 @@
 $activeURL = $_SERVER['REQUEST_URI'];
 
 $links = [
-    'Home' => '/'
+    'Home' => '/home'
 ];
 
 if (!empty($_SESSION['role'])) {

@@ -16,11 +16,13 @@ COPY src/php.ini /usr/local/etc/php
 # Copy application files directly to the Apache document root
 COPY . /var/www/html/
 
+
 RUN sed -i 's|/var/www/html|/var/www/html/src|' /etc/apache2/sites-available/000-default.conf
 RUN echo "Alias /public /var/www/html/public" >> /etc/apache2/sites-available/000-default.conf
 
 # Set permissions for Apache to access the files
 RUN chown -R www-data:www-data /var/www/html && \
-    chmod -R 700 /var/www/html
+chmod -R 700 /var/www/html
 
 RUN service apache2 restart
+EXPOSE 8080

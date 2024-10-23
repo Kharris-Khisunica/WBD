@@ -11,7 +11,7 @@ CREATE TABLE users (
     email VARCHAR(120),
     password VARCHAR(120),
     role user_role,
-    nama VARCHAR(50)
+    nama VARCHAR(50),
 );
 
 CREATE TABLE company_detail (
